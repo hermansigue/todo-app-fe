@@ -54,7 +54,7 @@ npm run dev
 4. Akses aplikasi melalui browser:
 
 ```
-http://localhost:5173/
+http://localhost:5000/
 ```
 
 ## Halaman Aplikasi
