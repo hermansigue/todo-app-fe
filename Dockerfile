@@ -10,11 +10,11 @@ COPY package*.json ./
 # Install dependencies
 RUN npm install
 
-# Salin seluruh kode aplikasi
+# Salin seluruh kode aplikasi kecuali yang ada di .dockerignore
 COPY . .
 
-# Build aplikasi Vue.js untuk produksi
-RUN npm run build
+# Hapus build lama jika ada lalu build ulang
+RUN rm -rf dist && npm run build
 
 # Tahap kedua: Menyajikan aplikasi dengan Nginx
 FROM nginx:alpine
@@ -25,5 +25,5 @@ COPY --from=build /app/dist /usr/share/nginx/html
 # Expose port 80 untuk aplikasi
 EXPOSE 80
 
-# Jalankan Nginx di background
+# Jalankan Nginx di foreground
 CMD ["nginx", "-g", "daemon off;"]
