@@ -1,0 +1,25 @@
+version: '3'
+services:
+  todo-fe-app:
+    build: .
+    container_name: todo_fe_app
+    working_dir: /app
+    volumes:
+      - .:/app
+      - /app/node_modules
+    ports:
+      - "5000:5000"
+    restart: 'always'
+    env_file:
+      - .env
+    networks:
+      - shared_network
+    environment:
+      - VITE_APP_NAME=$VITE_APP_NAME
+      - VITE_PORT=$VITE_PORT
+      - VITE_APP_URL=$VITE_APP_URL
+      - VITE_API_URL=$VITE_API_URL
+
+networks:
+  shared_network:
+    external: true
